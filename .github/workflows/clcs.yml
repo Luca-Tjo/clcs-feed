@@ -1,7 +1,7 @@
 name: CLCS submissions check
 on:
   schedule:
-    - cron: "0 6 1 * *"          # 06:00 UTC on the 1st of every month
+    - cron: "0 6 * * 1"          # 06:00 UTC every Monday (01:00 Jamaica)
   workflow_dispatch:
     inputs:
       mode:

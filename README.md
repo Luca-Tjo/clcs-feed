@@ -1,6 +1,6 @@
 # CLCS submissions -> SharePoint feed
 
-A monthly GitHub job reads the public UN CLCS submissions page, works out
+A weekly GitHub job reads the public UN CLCS submissions page, works out
 `Extended_continental_shelf_status` for every State, and publishes **one feed item per State whose value changed**
 (`docs/feed.xml`). A Power Automate flow (standard RSS trigger) writes each item into `State_Legal_Institutional`.
 No ISA data is stored here: only values derived from the public page and the State names/IDs in `names.json`.
@@ -18,7 +18,7 @@ No ISA data is stored here: only values derived from the public page and the Sta
 2. Repo > Settings > Pages > Deploy from branch > `main` / `/docs`. The feed is then at `https://luca-tjo.github.io/clcs-feed/feed.xml`.
 3. Repo > Actions > "CLCS submissions check" > Run workflow > mode **init** (records today's page as the baseline, publishes nothing).
 4. Review `docs/values.csv` (written by `python clcs_feed.py --dry-run`, or the workflow's **dry-run** mode). After that review: run it again with mode **publish-all** to push every State once.
-5. From then on the monthly run publishes only genuine changes.
+5. From then on the weekly run publishes only genuine changes.
 
 ## Power Automate flow (all standard connectors)
 1. New automated cloud flow, trigger **RSS - When a feed item is published**. Feed URL = the feed above; "Chosen property" = PublishDate.

@@ -5,7 +5,7 @@ Extended_continental_shelf_status values (one feed item per State).
 Modes
   python clcs_feed.py --init           record current values as the baseline, publish nothing
   python clcs_feed.py --publish-all    publish every State that appears on the page
-  python clcs_feed.py                  normal monthly run: publish only States whose value changed
+  python clcs_feed.py                  normal weekly run: publish only States whose value changed
   python clcs_feed.py --only "[S59] France"   publish just that State (to test the flow)
   python clcs_feed.py --dry-run        write docs/values.csv for review, change nothing else
   add  --html saved_page.html          read a saved copy of the page instead of fetching it
