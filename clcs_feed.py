@@ -6,6 +6,7 @@ Modes
   python clcs_feed.py --init           record current values as the baseline, publish nothing
   python clcs_feed.py --publish-all    publish every State that appears on the page
   python clcs_feed.py                  normal monthly run: publish only States whose value changed
+  python clcs_feed.py --only "[S59] France"   publish just that State (to test the flow)
   python clcs_feed.py --dry-run        write docs/values.csv for review, change nothing else
   add  --html saved_page.html          read a saved copy of the page instead of fetching it
 """
@@ -121,7 +122,7 @@ def write_feed(items, now):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--html"); ap.add_argument("--init", action="store_true")
-    ap.add_argument("--publish-all", action="store_true"); ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--publish-all", action="store_true"); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only")
     a = ap.parse_args()
     if a.html: html = Path(a.html).read_text(encoding="utf-8", errors="replace")
     else:
@@ -142,7 +143,8 @@ def main():
     state = json.loads(STATE.read_text()) if STATE.exists() else {"values": {}, "items": []}
     now = dt.datetime.now(dt.timezone.utc)
     prev = state["values"]
-    changed = [t for t, v in values.items() if v and (a.publish_all or (t in prev and prev[t] != v) or (t not in prev and not a.init and prev))]
+    if a.only and a.only not in values: raise SystemExit(f"--only: {a.only!r} is not a Title on the page")
+    changed = [a.only] if a.only else [t for t, v in values.items() if v and (a.publish_all or (t in prev and prev[t] != v) or (t not in prev and not a.init and prev))]
     if not a.init:
         for t in changed:
             state["items"].append(dict(title=t, value=values[t], pub=now.isoformat(), guid=f"{t}|{now:%Y%m%d%H%M}|{hashlib.md5(values[t].encode()).hexdigest()[:8]}"))

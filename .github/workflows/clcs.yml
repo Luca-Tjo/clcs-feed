@@ -8,7 +8,10 @@ on:
         description: "normal = publish changes only | init = record baseline, publish nothing | publish-all = publish every State | dry-run = write docs/values.csv only"
         default: "normal"
         type: choice
-        options: [normal, init, publish-all, dry-run]
+        options: [normal, init, publish-all, dry-run, test-one]
+      only:
+        description: "test-one mode: the list Title to publish"
+        default: "[S59] France"
 permissions:
   contents: write
 jobs:
@@ -25,6 +28,7 @@ jobs:
           if [ "$MODE" = "init" ]; then python clcs_feed.py --init
           elif [ "$MODE" = "publish-all" ]; then python clcs_feed.py --publish-all
           elif [ "$MODE" = "dry-run" ]; then python clcs_feed.py --dry-run
+          elif [ "$MODE" = "test-one" ]; then python clcs_feed.py --only "${{ github.event.inputs.only }}"
           else python clcs_feed.py; fi
       - name: Commit results (also keeps the schedule alive)
         run: |
