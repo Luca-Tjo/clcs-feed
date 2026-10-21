@@ -180,5 +180,12 @@
   "[S119] Turkiye": "Non Party",
   "[S177] Venezuela": "Non Party"
  },
- "items": []
+ "items": [
+  {
+   "title": "[S59] France",
+   "value": "Signatory and Party: 29 Jul 1994 | 11 Apr 1996",
+   "pub": "2026-10-21T21:16:57.329481+00:00",
+   "guid": "[S59] France|202610212116|65613f0d"
+  }
+ ]
 }
