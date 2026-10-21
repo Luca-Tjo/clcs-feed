@@ -9,7 +9,7 @@ No ISA data is stored here: only values derived from the public page and the Sta
 - Solo submissions are grouped by status with one year per submission: `Submissions with recommendations (2007, 2009, 2009)`.
 - Each joint submission is its own clause. Revised submissions use the same pattern with "Revised" in front.
 - Clauses are ordered by submission year, regardless of status.
-- Status comes from the row colour on the page (red = active, none = awaiting, green = recommendations, blue = deposit).
+- Status comes from the row colour on the page (red = active, none = pending, green = recommendations, blue = deposit).
 - A State whose row colour and recommendation dates disagree is NOT published; it is listed in `needs_review.txt`.
 - Set `GROUP_SOLO_BY_STATUS = False` for one clause per submission.
 

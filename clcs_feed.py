@@ -27,7 +27,7 @@ ALIASES = {"republic of korea": "korea republic of", "viet nam": "vietnam", "rus
            "tanzania": "united republic of tanzania", "federated states of micronesia": "micronesia federated states of"}
 COLOURS = {"rgba(245,122,122,0.3)": "active", "rgba(102,255,153,0.4)": "recs", "rgba(102,255,255,0.4)": "deposit"}
 WORD = {"recs": "with recommendations", "deposit": "with recommendations followed by deposit",
-        "active": "under active consideration", "awaiting": "awaiting consideration"}
+        "active": "under active consideration", "awaiting": "pending consideration"}
 SOLO_ORDER = ["deposit", "recs", "active", "awaiting"]
 
 def norm(s):
