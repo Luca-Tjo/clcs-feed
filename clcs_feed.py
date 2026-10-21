@@ -35,8 +35,9 @@ def norm(s):
     s = s.replace("united kingdom of great britain and northern ireland", "united kingdom")
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
-def status_of(td):
-    m = re.search(r"background-color:\s*([^;]+)", td.get("style") or "")
+def status_of(td, tr):
+    # colour is normally on each cell, but some rows (e.g. Nigeria) carry it on the <tr> instead
+    m = re.search(r"background-color:\s*([^;]+)", td.get("style") or "") or re.search(r"background-color:\s*([^;]+)", tr.get("style") or "")
     return COLOURS.get(re.sub(r"\s+", "", m.group(1)) if m else "", "awaiting")
 
 def split_states(title):
@@ -65,7 +66,7 @@ def parse(html):
             if joint and not re.match(r"joint", link, re.I): link = "Joint submission by " + link
             link = link.replace("United Kingdom of Great Britain and Northern Ireland", "United Kingdom") if joint else link
             ym = re.search(r"(\d{4})\s*$", c[2].get_text(strip=True))
-            status = status_of(c[-1])
+            status = status_of(c[-1], r)
             has_recs = bool(c[5].get_text(strip=True))
             rows.append(dict(no=c[0].get_text(strip=True).rstrip("."), revised=revised, joint=joint, title=link,
                              states=states, year=int(ym.group(1)) if ym else None, status=status,
