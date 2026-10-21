@@ -180,5 +180,12 @@
   "[S172] United States of America": "Non Party",
   "[S177] Venezuela": "Non Party"
  },
- "items": []
+ "items": [
+  {
+   "title": "[S59] France",
+   "value": "Signatory and Party: 10 Dec 1982 | 11 Apr 1996",
+   "pub": "2026-10-21T21:16:23.284058+00:00",
+   "guid": "[S59] France|202610212116|008bea96"
+  }
+ ]
 }
